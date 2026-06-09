@@ -1,4 +1,4 @@
-# JiraCli Installation Guide
+# jira Installation Guide
 
 **Hermes Agent** • MIT License
 
@@ -28,23 +28,35 @@
 
 ### Step 1: Locate Binary
 
-The precompiled binary is in the `publish/` directory:
+The precompiled binaries are in the `publish/` directory:
 
 ```bash
-cd mcp_jira
-ls -lh publish/jira
+# Platform-specific binaries:
+ls -lh publish/mac/jira      # macOS (arm64)
+ls -lh publish/linux/jira    # Linux (x64)
+ls -lh publish/windows/jira.exe  # Windows (x64)
 ```
 
 Expected:
 ```
--rwxr-xr-x  jira  (70M)
+-rwxr-xr-x  jira  (74M)  # macOS
+-rwxr-xr-x  jira  (68M)  # Linux
+-rwxr-xr-x  jira  (69M)  # Windows
 ```
 
 ### Step 2: Copy to System PATH
 
 ```bash
-chmod +x publish/jira
-sudo cp publish/jira /usr/local/bin/
+# macOS
+chmod +x publish/mac/jira
+sudo cp publish/mac/jira /usr/local/bin/
+
+# Linux
+chmod +x publish/linux/jira
+sudo cp publish/linux/jira /usr/local/bin/
+
+# Windows (in WSL2 or terminal)
+copy publish\windows\jira.exe C:\Windows\System32\
 ```
 
 **Verify installation**:
@@ -54,30 +66,28 @@ jira --version
 
 Expected:
 ```
-jira version 1.3.0 (.NET 8.0.0)
+jira v1.2.0
 ```
 
 ---
 
 ## 🖥️ Platform-Specific Steps
 
-### Linux (x86-64)
+### Linux (x64)
 
 ```bash
-# From mcp_jira directory
-chmod +x publish/jira
-sudo cp publish/jira /usr/local/bin/
+chmod +x publish/linux/jira
+sudo cp publish/linux/jira /usr/local/bin/
 
 # Verify
 jira --version
 ```
 
-### macOS (Intel & Silicon)
+### macOS (Apple Silicon / Intel)
 
 ```bash
-# From mcp_jira directory
-chmod +x publish/jira
-sudo cp publish/jira /usr/local/bin/
+chmod +x publish/mac/jira
+sudo cp publish/mac/jira /usr/local/bin/
 
 # Remove quarantine attribute (macOS security)
 xattr -d com.apple.quarantine /usr/local/bin/jira
@@ -86,22 +96,21 @@ xattr -d com.apple.quarantine /usr/local/bin/jira
 jira --version
 ```
 
-### Windows (WSL2)
+### Windows (x64)
 
-```bash
-# From mcp_jira directory in WSL2
-chmod +x publish/jira
-
-# Copy to home bin or system path
-mkdir -p ~/bin
-cp publish/jira ~/bin/
-chmod +x ~/bin/jira
-
-# Add to PATH (add to ~/.bashrc or ~/.zshrc)
-echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
+```powershell
+# From PowerShell (admin)
+copy publish\windows\jira.exe C:\Windows\System32\
 
 # Verify
+jira --version
+```
+
+Or via WSL2:
+
+```bash
+cp publish/linux/jira /usr/local/bin/jira
+chmod +x /usr/local/bin/jira
 jira --version
 ```
 
@@ -141,8 +150,8 @@ jira config path
 | `jira: command not found` | Binary not in PATH. Use absolute path: `/usr/local/bin/jira --version` |
 | `Permission denied` | Run `chmod +x /usr/local/bin/jira` |
 | `Cannot execute binary` (macOS) | Run `xattr -d com.apple.quarantine /usr/local/bin/jira` |
-| `Binary not found` | Verify in `mcp_jira/publish/jira` exists (70 MB size) |
-| `Cannot copy: Permission denied` | Use `sudo cp` or copy to home: `cp publish/jira ~/bin/` |
+| `Binary not found` | Check platform dir: `ls -lh publish/mac/jira` or `publish/linux/jira` |
+| `Cannot copy: Permission denied` | Use `sudo cp` or copy to home: `cp publish/linux/jira ~/bin/` |
 
 ---
 

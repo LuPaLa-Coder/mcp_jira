@@ -27,8 +27,8 @@
 ### Highlights
 
 - ✅ Jira Cloud + Jira Server/Data Center support
-- ✅ Self-contained `publish/jira` binary
-- ✅ 30 core MCP tools documented (`68` tools implemented overall)
+- ✅ Self-contained binary per platform (`publish/mac/`, `publish/linux/`, `publish/windows/`)
+- ✅ MCP tools for issue, project, attachment, sprint, user, field, filter, webhook operations
 - ✅ Multi-site configuration and context switching
 - ✅ Attachment downloads, project metadata, issue type and status helpers
 - ✅ GitHub Copilot CLI + Claude Desktop integration
@@ -40,8 +40,11 @@
 ### 1. Install the binary
 
 ```bash
-chmod +x publish/jira
-sudo cp publish/jira /usr/local/bin/
+# Choose your platform:
+chmod +x publish/mac/jira && sudo cp publish/mac/jira /usr/local/bin/    # macOS
+chmod +x publish/linux/jira && sudo cp publish/linux/jira /usr/local/bin/  # Linux
+# Windows: copy publish\windows\jira.exe C:\Windows\System32\
+
 jira --version
 ```
 

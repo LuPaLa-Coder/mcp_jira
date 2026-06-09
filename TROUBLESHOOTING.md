@@ -408,20 +408,17 @@ This is **already fixed** in the current version of jira-cli.
 
 **Solutions**:
 
-Ensure **no debug output** before MCP server starts:
+The jira MCP server routes all log output to stderr by design, keeping stdout clean for JSON-RPC.
 
-1. **Check Program.cs** — no `Console.WriteLine` before server init
-2. **Redirect logs to stderr**:
-   ```csharp
-   var loggerFactory = LoggerFactory.Create(builder =>
-       builder.AddConsole(opts => opts.FormatterName = "simple")
-              .SetMinimumLevel(LogLevel.Debug)
-   );
+1. **Verify binary is current**:
+   ```bash
+   jira --version
    ```
 
-3. **Test MCP manually**:
+2. **Test MCP manually**:
    ```bash
-   jira mcp serve < integration/smoke-test.jsonl
+   jira mcp serve
+   # Send a JSON-RPC initialize request to verify
    ```
 
 ---
@@ -466,18 +463,21 @@ Ensure **no debug output** before MCP server starts:
 
 ## 🔍 General Debugging
 
-### Enable Debug Mode (CLI only)
+### Enable Debug Mode
 
 ```bash
+# CLI mode
 jira --debug issue get PROJ-123
+
+# MCP server mode
+jira mcp serve --debug
 ```
 
-Shows:
+Shows detailed HTTP request/response info on stderr:
 ```
-[DBG] → GET https://jira.myco.com/rest/api/3/issues/PROJ-123
+[DBG] → GET https://jira.myco.com/rest/api/3/issue/PROJ-123
 [DBG] ← 200 OK (156 ms)
-[DBG]   Headers: {...}
-[DBG]   Body: {...}
+[DBG]   Body: {"key":"PROJ-123",...}
 ```
 
 ---

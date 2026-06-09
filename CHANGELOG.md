@@ -63,8 +63,8 @@ All changes in this changelog are attributed to:
 
 **Hermes Agent** • MIT License  
 **Author**: Paolino Salamone  
-**Version**: 1.1.0  
-**Last Updated**: 2025-01-15
+**Version**: 1.2.0  
+**Last Updated**: 2026-06-09
 
 ---
 

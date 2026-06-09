@@ -1,10 +1,10 @@
-# JiraCli MCP Services Documentation
+# jira MCP Services Documentation
 
 **Hermes Agent** • MIT License
 
 **Author**: Paolino Salamone
 
-> Reference of 30 core MCP tools in jira-cli server (68 tools implemented overall in `McpTools.cs`).
+> Reference of the MCP tools available in the jira MCP server.
 
 ---
 

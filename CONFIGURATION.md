@@ -1,4 +1,4 @@
-# JiraCli Configuration Guide
+# jira Configuration Guide
 
 **Hermes Agent** • MIT License
 
