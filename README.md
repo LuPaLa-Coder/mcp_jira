@@ -27,7 +27,7 @@
 ### Highlights
 
 - ✅ Jira Cloud + Jira Server/Data Center support
-- ✅ Self-contained binary per platform (`publish/mac/`, `publish/linux/`, `publish/windows/`)
+- ✅ Self-contained binary per platform (macOS arm64, Linux x64, Windows x64) on [GitHub Releases](https://github.com/LuPaLa-Coder/mcp_jira/releases/latest)
 - ✅ MCP tools for issue, project, attachment, sprint, user, field, filter, webhook operations
 - ✅ Multi-site configuration and context switching
 - ✅ Attachment downloads, project metadata, issue type and status helpers
@@ -40,10 +40,9 @@
 ### 1. Install the binary
 
 ```bash
-# Choose your platform:
-chmod +x publish/mac/jira && sudo cp publish/mac/jira /usr/local/bin/    # macOS
-chmod +x publish/linux/jira && sudo cp publish/linux/jira /usr/local/bin/  # Linux
-# Windows: copy publish\windows\jira.exe C:\Windows\System32\
+# Choose your platform: jira-macos-arm64 | jira-linux-x64 | jira-windows-x64.exe
+curl -L -o jira https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-macos-arm64
+chmod +x jira && sudo cp jira /usr/local/bin/
 
 jira --version
 ```

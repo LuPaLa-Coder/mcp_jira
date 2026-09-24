@@ -27,10 +27,11 @@
    ls -la /usr/local/bin/jira
    ```
 
-3. **Re-install binary**:
+3. **Re-install binary** (see [INSTALLATION.md](INSTALLATION.md) for other platforms):
    ```bash
-   chmod +x publish/jira
-   sudo cp publish/jira /usr/local/bin/
+   curl -L -o jira https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-linux-x64
+   chmod +x jira
+   sudo cp jira /usr/local/bin/
    ```
 
 4. **Add to PATH manually**:
@@ -76,24 +77,20 @@ jira --version
    ```bash
    uname -m
    ```
-   - `x86_64` → The provided binary is compatible ✅
-   - `aarch64` → The provided binary may not be compatible
-   - `arm7l` → The provided binary is not compatible
+   - `x86_64` on Linux → use `jira-linux-x64` ✅
+   - `arm64` on macOS → use `jira-macos-arm64` ✅
+   - `aarch64` / `armv7l` on Linux → not currently supported
 
 2. **Verify binary architecture**:
    ```bash
-   file publish/jira
-   # Should show: ELF 64-bit LSB executable, x86-64
+   file /usr/local/bin/jira
+   # Linux should show: ELF 64-bit LSB executable, x86-64
+   # macOS should show: Mach-O 64-bit executable arm64
    ```
 
-3. **Use binary as-is for Linux x86-64**:
-   ```bash
-   chmod +x publish/jira
-   sudo cp publish/jira /usr/local/bin/
-   jira --version
-   ```
+3. **Re-download the right asset** from the [latest release](https://github.com/LuPaLa-Coder/mcp_jira/releases/latest) and reinstall (see [INSTALLATION.md](INSTALLATION.md)).
 
-**Note**: The binary is precompiled for Linux x86-64. Other architectures are not currently supported.
+**Note**: Binaries are available for macOS arm64, Linux x64 and Windows x64.
 
 ---
 
@@ -111,7 +108,7 @@ jira --version
 2. **Use WSL2 on Windows** (recommended):
     ```bash
     wsl --install
-    cd /tmp && cp ~/publish/jira . && chmod +x jira
+    cd /tmp && curl -L -o jira https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-linux-x64 && chmod +x jira
     ```
 
 ---
@@ -389,10 +386,11 @@ This is **already fixed** in the current version of jira-cli.
    jira --version
    ```
 
-2. **Reinstall from publish/jira**:
+2. **Reinstall from the latest release** (see [INSTALLATION.md](INSTALLATION.md) for other platforms):
    ```bash
-   chmod +x publish/jira
-   sudo cp publish/jira /usr/local/bin/jira
+   curl -L -o jira https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-linux-x64
+   chmod +x jira
+   sudo cp jira /usr/local/bin/jira
    ```
 
 3. **Test MCP server**:

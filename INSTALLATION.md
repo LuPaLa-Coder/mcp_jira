@@ -26,37 +26,44 @@
 
 ## 📦 Installation
 
-### Step 1: Locate Binary
+### Step 1: Download Binary
 
-The precompiled binaries are in the `publish/` directory:
+The precompiled binaries are attached to each [GitHub Release](https://github.com/LuPaLa-Coder/mcp_jira/releases/latest):
+
+| Platform | Asset | Size |
+|----------|-------|------|
+| macOS (arm64) | `jira-macos-arm64` | ~74 MB |
+| Linux (x64) | `jira-linux-x64` | ~68 MB |
+| Windows (x64) | `jira-windows-x64.exe` | ~69 MB |
 
 ```bash
-# Platform-specific binaries:
-ls -lh publish/mac/jira      # macOS (arm64)
-ls -lh publish/linux/jira    # Linux (x64)
-ls -lh publish/windows/jira.exe  # Windows (x64)
+# macOS
+curl -L -o jira https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-macos-arm64
+
+# Linux
+curl -L -o jira https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-linux-x64
 ```
 
-Expected:
+```powershell
+# Windows (PowerShell)
+Invoke-WebRequest -OutFile jira.exe https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-windows-x64.exe
 ```
--rwxr-xr-x  jira  (74M)  # macOS
--rwxr-xr-x  jira  (68M)  # Linux
--rwxr-xr-x  jira  (69M)  # Windows
+
+**Verify integrity** (optional): compare with `SHA256SUMS` from the same release.
+
+```bash
+shasum -a 256 jira
 ```
 
 ### Step 2: Copy to System PATH
 
 ```bash
-# macOS
-chmod +x publish/mac/jira
-sudo cp publish/mac/jira /usr/local/bin/
+# macOS / Linux
+chmod +x jira
+sudo cp jira /usr/local/bin/
 
-# Linux
-chmod +x publish/linux/jira
-sudo cp publish/linux/jira /usr/local/bin/
-
-# Windows (in WSL2 or terminal)
-copy publish\windows\jira.exe C:\Windows\System32\
+# Windows (PowerShell, admin)
+copy jira.exe C:\Windows\System32\
 ```
 
 **Verify installation**:
@@ -76,8 +83,9 @@ jira v1.2.0
 ### Linux (x64)
 
 ```bash
-chmod +x publish/linux/jira
-sudo cp publish/linux/jira /usr/local/bin/
+curl -L -o jira https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-linux-x64
+chmod +x jira
+sudo cp jira /usr/local/bin/
 
 # Verify
 jira --version
@@ -86,8 +94,9 @@ jira --version
 ### macOS (Apple Silicon / Intel)
 
 ```bash
-chmod +x publish/mac/jira
-sudo cp publish/mac/jira /usr/local/bin/
+curl -L -o jira https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-macos-arm64
+chmod +x jira
+sudo cp jira /usr/local/bin/
 
 # Remove quarantine attribute (macOS security)
 xattr -d com.apple.quarantine /usr/local/bin/jira
@@ -100,7 +109,8 @@ jira --version
 
 ```powershell
 # From PowerShell (admin)
-copy publish\windows\jira.exe C:\Windows\System32\
+Invoke-WebRequest -OutFile jira.exe https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-windows-x64.exe
+copy jira.exe C:\Windows\System32\
 
 # Verify
 jira --version
@@ -109,8 +119,9 @@ jira --version
 Or via WSL2:
 
 ```bash
-cp publish/linux/jira /usr/local/bin/jira
-chmod +x /usr/local/bin/jira
+curl -L -o jira https://github.com/LuPaLa-Coder/mcp_jira/releases/latest/download/jira-linux-x64
+chmod +x jira
+sudo cp jira /usr/local/bin/
 jira --version
 ```
 
@@ -134,7 +145,7 @@ jira config path
 
 ## 📋 Installation Checklist
 
-- [ ] Binary located in `publish/jira`
+- [ ] Binary downloaded from the [latest release](https://github.com/LuPaLa-Coder/mcp_jira/releases/latest)
 - [ ] Binary is executable (`chmod +x`)
 - [ ] Binary copied to `/usr/local/bin/` (Linux/macOS) or `~/bin/` (Windows)
 - [ ] `jira --version` outputs version number
@@ -150,8 +161,8 @@ jira config path
 | `jira: command not found` | Binary not in PATH. Use absolute path: `/usr/local/bin/jira --version` |
 | `Permission denied` | Run `chmod +x /usr/local/bin/jira` |
 | `Cannot execute binary` (macOS) | Run `xattr -d com.apple.quarantine /usr/local/bin/jira` |
-| `Binary not found` | Check platform dir: `ls -lh publish/mac/jira` or `publish/linux/jira` |
-| `Cannot copy: Permission denied` | Use `sudo cp` or copy to home: `cp publish/linux/jira ~/bin/` |
+| `Binary not found` | Download the asset for your platform from the [latest release](https://github.com/LuPaLa-Coder/mcp_jira/releases/latest) |
+| `Cannot copy: Permission denied` | Use `sudo cp` or copy to home: `cp jira ~/bin/` |
 
 ---
 
