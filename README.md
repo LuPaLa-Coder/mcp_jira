@@ -94,6 +94,8 @@ Then follow [MCP-SETUP.md](MCP-SETUP.md) to register the server with GitHub Copi
 jira issue get PROJ-123
 jira issue create --project PROJ --type Task --summary "My task"
 jira issue update PROJ-123 --summary "New title"
+jira issue assign PROJ-123 --name jdoe            # Server/DC (username); Cloud: --to <accountId>
+jira issue changelog PROJ-123
 jira issue transition PROJ-123 --to "In Progress"
 jira issue comment PROJ-123 --body "Ready for testing"
 jira issue worklog PROJ-123 --time "2h 30m"
@@ -107,6 +109,7 @@ jira issue attachments PROJ-123
 jira issue download-attachment PROJ-123 --id 1003
 jira issue download-all-attachments PROJ-123
 jira search --jql "project = PROJ AND status = Open" --max-results 10
+jira search --jql "project = PROJ" --fields key,summary,attachment,comment
 ```
 
 ### Project, issue type, and status commands

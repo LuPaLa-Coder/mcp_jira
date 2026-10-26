@@ -7,6 +7,20 @@ All notable changes to the documentation suite are recorded here.
 
 ---
 
+## [1.3.0] - 2026-10-26
+
+### Added
+- `issue changelog` / MCP tool `get_issue_changelog`: change history of an issue (Cloud and Server/DC).
+- `--fields` on `search` (MCP: `fields` on `search_issues_jql` and `search_issues_jql_post`), e.g. to include attachments and comments.
+- `issue update --assignee` / `--assignee-name` and `issue assign --name`.
+
+### Fixed
+- Assigning issues on Jira Server/Data Center: the username is now sent as `name` instead of `accountId`.
+- `search_issues_jql_post` accepts `startAt`, so Server/DC can be paged (no `nextPageToken` there).
+- `download_attachment` now tells "not authenticated" (401, with session/MFA status) apart from "attachment not found" (404).
+
+---
+
 ## [1.1.0] - 2025-01-15
 
 ### Added
